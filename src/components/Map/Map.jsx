@@ -2,13 +2,15 @@ import React from 'react';
 import styles from './Map.module.css';
 import mapStyle from './map-style';
 
-function Map({lat, lng, zoom}) {
+class Map extends React.Component {
   // Create a ref object that exposes native DOM elements
-  const mapDiv = React.createRef();
-
+   mapDiv = React.createRef();
+   
+setMap() {
+  const{lat, lng, zoom}= this.props;
   if (lat && lng) {
     const map = new window.google.maps.Map(
-      mapDiv.current, {
+      this.mapDiv.current, {
         zoom: zoom || 12,
         center: {lat, lng},
         disableDefaultUI: true,
@@ -17,10 +19,26 @@ function Map({lat, lng, zoom}) {
     );
     new window.google.maps.Marker({position: {lat, lng}, map: map});
   }
+}
+  // Called after the first render
+  componentDidMount() {
+    this.setMap();
+  }
 
+  // Called when props or state change
+  componentDidUpdate() {
+    this.setMap();
+  }
+
+
+
+
+  
+render() {
   return (
-    <div ref={mapDiv} className={styles.Map}></div>
+    <div ref={this.mapDiv} className={styles.Map}></div>
   );
+}
 }
 
 export default Map;
