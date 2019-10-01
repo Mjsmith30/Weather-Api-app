@@ -1,10 +1,7 @@
-const BASE_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=imperial&appid=d3945aa316355ce92bb8cc10bf63e3da`;
-
 export function getCurWeatherByLatLng(lat, lng) {
-   const url = `${BASE_URL}lat=${lat}&lon=${lng}&units=imperial&appid=d3945aa316355ce92bb8cc10bf63e3da`
-        fetch({url, mode: 'cors'}).then(res => res.json())
-    
-}
+    const endpoint = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=imperial&appid=d3945aa316355ce92bb8cc10bf63e3da`;
+    return fetch(endpoint, {mode: 'cors'}).then(res => res.json());
+  }
 
 
 
